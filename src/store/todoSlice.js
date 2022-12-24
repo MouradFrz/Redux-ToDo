@@ -38,7 +38,9 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 // 		],
 // 	},
 // ];
-const initialState = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []
+const initialState = localStorage.getItem("todos")
+	? JSON.parse(localStorage.getItem("todos"))
+	: [];
 const todoSlice = createSlice({
 	name: "todo",
 	initialState,
@@ -60,12 +62,39 @@ const todoSlice = createSlice({
 		},
 		removeFolder: {
 			reducer: (state, { payload }) => {
-				state.splice(state.map(el=>el.id).indexOf(payload),1);
-				console.log()
+				state.splice(state.map((el) => el.id).indexOf(payload), 1);
+				localStorage.setItem("todos", JSON.stringify(state));
+			},
+		},
+		addGroup: {
+			reducer: (state, { payload }) => {
+				const indexOfCurrentFolder = state
+					.map((el) => el.id)
+					.indexOf(payload.id);
+				state[indexOfCurrentFolder].groups.push({
+					id: nanoid(),
+					name: payload.name,
+					tasks: [],
+				});
+				localStorage.setItem("todos", JSON.stringify(state));
+			},
+		},
+		removeGroup: {
+			reducer: (state, { payload }) => {
+				const indexOfCurrentFolder = state
+					.map((el) => el.id)
+					.indexOf(payload.folderId);
+				state[indexOfCurrentFolder].groups.splice(
+					state[indexOfCurrentFolder].groups
+						.map((el) => el.id)
+						.indexOf(payload.groupId),
+					1
+				);
 				localStorage.setItem("todos", JSON.stringify(state));
 			},
 		},
 	},
 });
 export default todoSlice.reducer;
-export const { addFolder, removeFolder } = todoSlice.actions;
+export const { addFolder, removeFolder, addGroup, removeGroup } =
+	todoSlice.actions;

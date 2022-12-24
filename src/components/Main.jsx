@@ -5,9 +5,7 @@ import TasksDisplay from "./TasksDisplay";
 function Main({ sidebar, currentFolder }) {
 	return (
 		<div
-			className={`w-[calc(100%-240px)] bg-accent h-fit  transition-all ${
-				!currentFolder ? "h-[100vh]" : ""
-			} 
+			className={`w-[calc(100%-240px)] bg-accent h-fit  transition-all min-h-[100vh] 
     ${!sidebar ? "w-[100%]" : ""}
     `}
 		>
