@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../public/todo-logo.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addFolder, removeFolder } from "../store/todoSlice";
 import { BsFillCaretRightFill } from "react-icons/bs";
+import { BsFillTrashFill } from "react-icons/bs";
 function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
+	const dispatch = useDispatch();
 	const folders = useSelector((state) => state.todo);
+	const [newFolder, setNewFolder] = useState("");
 	return (
 		<div
 			className={`w-[240px] bg-accent border-r-[1px] transition-all px-5 h-[100vh] fixed top-0 left-0 
@@ -18,19 +22,52 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 			<div>
 				{folders.map((folder, index) => {
 					return (
-						<button
-							key={index}
-							className={` ${
-								currentFolder === folder.name ? "font-bold bg-darker" : ""
-							} py-1 duration-75 mb-[1px] rounded-sm px-4 hover:bg-darker transition w-full text-left`}
-							onClick={() => {
-								setCurrentFolder(folder.name);
-							}}
-						>
-							{folder.name}
-						</button>
+						<div key={index} className="relative group">
+							<button
+								onClick={() => {
+									if (folder.id === currentFolder) {
+										setCurrentFolder("");
+									}
+									dispatch(removeFolder(folder.id));
+								}}
+								className="absolute hover:bg-darker group-hover:block hidden px-2 py-1 top-[50%] translate-y-[-50%] right-4"
+							>
+								<BsFillTrashFill />
+							</button>
+							<button
+								className={` ${
+									currentFolder === folder.id ? "font-bold bg-darker" : ""
+								} py-1 duration-75 mb-[1px] rounded-sm px-4 hover:bg-darker transition w-full text-left`}
+								onClick={() => {
+									setCurrentFolder(folder.id);
+								}}
+							>
+								{folder.name}
+							</button>
+						</div>
 					);
 				})}
+				<div className="flex gap-3">
+					<input
+						type="text"
+						className="border-green-100 px-3 outline-none border-[1px] w-[90%]"
+						value={newFolder}
+						onChange={(e) => {
+							setNewFolder(e.target.value);
+						}}
+					/>
+					<button
+						className="w-[10%] text-3xl"
+						onClick={() => {
+							if (newFolder) {
+								dispatch(addFolder(newFolder));
+							}
+							setNewFolder("");
+						}}
+					>
+						+
+					</button>
+				</div>
 			</div>
 			<button
 				onClick={() => {
@@ -38,7 +75,9 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 				}}
 				className="absolute top-0 left-[100%] bg-accent rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2"
 			>
-				<BsFillCaretRightFill />
+				<BsFillCaretRightFill
+					className={`transition ${sidebar ? "rotate-[180deg]" : ""}`}
+				/>
 			</button>
 		</div>
 	);
