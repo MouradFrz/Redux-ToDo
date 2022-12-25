@@ -10,8 +10,8 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 	const [newFolder, setNewFolder] = useState("");
 	return (
 		<div
-			className={`w-[240px] bg-accent border-r-[1px] transition-all px-5 h-[100vh] fixed top-0 left-0 
-		${!sidebar ? "left-[-240px]" : ""}
+			className={`sm:w-[240px]  w-full z-50  bg-accent border-r-[1px] transition-all px-5 h-[100vh] fixed top-0 left-0 
+		${!sidebar ? "sm:left-[-240px] left-[-100%]" : ""}
 		`}
 		>
 			<div className="flex justify-center gap-2 p-6 items-center">
@@ -40,6 +40,9 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 								} py-1 duration-75 mb-[1px] rounded-sm px-4 hover:bg-darker transition w-full text-left`}
 								onClick={() => {
 									setCurrentFolder(folder.id);
+									if(document.querySelector("body").offsetWidth<640){
+										setSidebar(false)
+									}
 								}}
 							>
 								{folder.name}
@@ -73,13 +76,22 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 				onClick={() => {
 					setSidebar((prev) => !prev);
 				}}
-				className="absolute top-0 left-[100%] bg-accent rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2"
+				className={` ${
+					sidebar ? "rotate-[180deg]" : ""
+				} transition-all origin-left absolute top-0 left-[100%] bg-accent rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2`}
 			>
-				<BsFillCaretRightFill
-					className={`transition ${sidebar ? "rotate-[180deg]" : ""}`}
-				/>
+				<BsFillCaretRightFill />
 			</button>
-			<p className="text-xs text-center absolute bottom-4 left-0 ">Designed and Developed by <a target="_blank" className="font-bold" href="https://www.linkedin.com/in/mourad-yaou/">Yaou Mourad</a></p>
+			<p className="text-xs text-center w-full absolute bottom-4 left-0 ">
+				Designed and Developed by{" "}
+				<a
+					target="_blank"
+					className="font-bold "
+					href="https://www.linkedin.com/in/mourad-yaou/"
+				>
+					Yaou Mourad
+				</a>
+			</p>
 		</div>
 	);
 }
