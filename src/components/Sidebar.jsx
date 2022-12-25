@@ -79,6 +79,7 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 					className={`transition ${sidebar ? "rotate-[180deg]" : ""}`}
 				/>
 			</button>
+			<p className="text-xs text-center absolute bottom-4 left-0 ">Designed and Developed by <a target="_blank" className="font-bold" href="https://www.linkedin.com/in/mourad-yaou/">Yaou Mourad</a></p>
 		</div>
 	);
 }

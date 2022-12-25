@@ -198,5 +198,5 @@ export const {
 	addTask,
 	setTaskDone,
 	deleteTask,
-	setTaskImportant
+	setTaskImportant,
 } = todoSlice.actions;
