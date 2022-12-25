@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../public/todo-logo.png";
+import logo from "/todo-logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { addFolder, removeFolder } from "../store/todoSlice";
 import { BsFillCaretRightFill } from "react-icons/bs";
