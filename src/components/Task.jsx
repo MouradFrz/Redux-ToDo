@@ -7,7 +7,7 @@ function Task({ task, groupId, currentFolder }) {
 	const dispatch = useDispatch();
 	return (
 		<div
-			className="bg-accent rounded-md mb-2 p-4 custom-border relative cursor-pointer"
+			className="bg-accent dark:bg-darkcent rounded-md mb-2 p-4 custom-border relative cursor-pointer"
 			onClick={() => {
 				dispatch(
 					setTaskDone({ folderId: currentFolder, groupId, taskId: task.id })
@@ -41,7 +41,7 @@ function Task({ task, groupId, currentFolder }) {
 				<BsExclamationLg className="hover:text-red-400" />
 			</button>
 			{task.done && (
-				<div className="absolute top-0 left-0 w-full h-full bg-gray-300/70"></div>
+				<div className="absolute top-0 left-0 w-full h-full rounded-sm dark:bg-darkerdark/70 bg-gray-300/70"></div>
 			)}
 			<span
 				className={`block w-[4px] h-full  ${

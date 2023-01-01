@@ -10,7 +10,7 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 	const [newFolder, setNewFolder] = useState("");
 	return (
 		<div
-			className={`sm:w-[240px]  w-full z-50  bg-accent border-r-[1px] transition-all px-5 h-[100vh] fixed top-0 left-0 
+			className={`sm:w-[240px]  w-full z-50  bg-accent dark:text-accent dark:bg-darkcent dark:border-r-darkerdark border-r-[1px] transition-all px-5 h-[100vh] fixed top-0 left-0 
 		${!sidebar ? "sm:left-[-240px] left-[-100%]" : ""}
 		`}
 		>
@@ -22,7 +22,7 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 			<div>
 				{folders.map((folder, index) => {
 					return (
-						<div key={index} className="relative group">
+						<div key={index} className="relative group ">
 							<button
 								onClick={() => {
 									if (folder.id === currentFolder) {
@@ -30,14 +30,14 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 									}
 									dispatch(removeFolder(folder.id));
 								}}
-								className="absolute hover:bg-darker group-hover:block hidden px-2 py-1 top-[50%] translate-y-[-50%] right-4"
+								className="absolute hover:bg-darker dark:hover:bg-darkerdark group-hover:block hidden px-2 py-1 top-[50%] translate-y-[-50%] right-4"
 							>
 								<BsFillTrashFill />
 							</button>
 							<button
 								className={` ${
-									currentFolder === folder.id ? "font-bold bg-darker" : ""
-								} py-1 duration-75 mb-[1px] rounded-sm px-4 hover:bg-darker transition w-full text-left`}
+									currentFolder === folder.id ? "font-bold bg-darker dark:bg-darkerdark" : ""
+								} py-1 duration-75 mb-[1px] rounded-sm px-4 hover:bg-darker dark:hover:bg-darkerdark transition w-full text-left`}
 								onClick={() => {
 									setCurrentFolder(folder.id);
 									if(document.querySelector("body").offsetWidth<640){
@@ -53,8 +53,9 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 				<div className="flex gap-3">
 					<input
 						type="text"
-						className="border-green-100 px-3 outline-none border-[1px] w-[90%]"
+						className="border-darkcent dark:bg-darkerdark px-3 outline-none border-b-[1px] w-[90%]"
 						value={newFolder}
+						placeholder="New folder name"
 						onChange={(e) => {
 							setNewFolder(e.target.value);
 						}}
@@ -78,7 +79,7 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 				}}
 				className={` ${
 					sidebar ? "rotate-[180deg]" : ""
-				} transition-all origin-left absolute top-0 left-[100%] bg-accent rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2`}
+				} transition-all origin-left absolute top-0 left-[100%] bg-accent dark:bg-darkcent dark:border-darkcent rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2`}
 			>
 				<BsFillCaretRightFill />
 			</button>
