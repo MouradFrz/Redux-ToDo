@@ -79,7 +79,7 @@ function Sidebar({ sidebar, setSidebar, currentFolder, setCurrentFolder }) {
 				}}
 				className={` ${
 					sidebar ? "rotate-[180deg]" : ""
-				} transition-all origin-left absolute top-0 left-[100%] bg-accent dark:bg-darkcent dark:border-darkcent rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2`}
+				} transition-all origin-left absolute top-0 left-[100%] bg-accent dark:bg-darkcent dark:border-darkerdark rounded-tr-xl rounded-br-xl border-r-[1px] border-t-[1px] border-b-[1px] p-2`}
 			>
 				<BsFillCaretRightFill />
 			</button>
